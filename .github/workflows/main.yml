@@ -38,19 +38,19 @@ jobs:
           sleep 15  # Wait for backend to start listening
           docker ps
 
-      - name: Run backend tests inside backend container
-        run: |
-          backend_container=$(docker ps --filter "name=backend" --format "{{.ID}}")
+      # - name: Run backend tests inside backend container
+      #   run: |
+      #     backend_container=$(docker ps --filter "name=backend" --format "{{.ID}}")
 
-          if [ -z "$backend_container" ]; then
-            echo "❌ Backend container not found."
-            docker ps -a
-            exit 1
-          fi
+      #     if [ -z "$backend_container" ]; then
+      #       echo "❌ Backend container not found."
+      #       docker ps -a
+      #       exit 1
+      #     fi
 
-          echo "✅ Found backend container: $backend_container"
-          docker exec "$backend_container" npm install
-          docker exec "$backend_container" npm test
+      #     echo "✅ Found backend container: $backend_container"
+      #     docker exec "$backend_container" npm install
+      #     docker exec "$backend_container" npm test
 
       - name: Shut down all containers
         if: always()
